@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+    <a href="{% url 'bite:index' %}">Home</a> > Delete Dish
+    <hr>
+    <p>
+    Are you sure you want to delete:<br/>
+    Name - {{ object.name }}<br/>
+    Price - {{ object.price }}<br/>
+    Description - {{ object.description }}<br/>
+    </p>
+    <form method="post" class="form">
+        {% csrf_token %}
+        <ul>
+            {% buttons %}
+                <button type="submit" class="btn btn-danger">
+                    {% bootstrap_icon "trash" %} {{ view.button_label|default:'Add' }}
+                </button>
+            {% endbuttons %}
+        </ul>
+    </form>
+{% endblock %}

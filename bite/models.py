@@ -1,11 +1,12 @@
 from django.conf import settings
 from django.core.validators import RegexValidator
 from django.db import models
-
+from django.core.validators import MinValueValidator
 
 # Create your models here.
 # TODO move this validator to somewhere else!
 name_validator = RegexValidator(r'^[a-zA-Z]+$')
+
 
 # TODO add imagaField for restaurant image, resize it.
 class Restaurant(models.Model):
@@ -49,6 +50,7 @@ class Restaurant(models.Model):
     def __str__(self):
         return "{} - {}".format(self.name, self.phone)
 
+
 class Dish(models.Model):
     # Relations
     restaurant = models.ForeignKey(
@@ -56,22 +58,19 @@ class Dish(models.Model):
         related_name='dishes',
         on_delete=models.CASCADE,
     )
-    # Attributes - Mandatorgit
+    # Attributes - Mandatory
     name = models.CharField(max_length=50)
     price = models.DecimalField(decimal_places=2, max_digits=3)
     # Attributes - Optional
-    desc = models.CharField(
-        max_length=100,
-        null=True,
-        blank=True
-    )
+    description = models.CharField(max_length=100, null=True, blank=True)
 
     # Object Manager
     # Custom Properties Methods
     # Meta and String
 
     def __str__(self):
-        return "{}-{}-{}".format(self.name, self.price, self.desc)
+        return "{}-{}-{}".format(self.name, self.price, self.description)
+
 
 class Company(models.Model):
     # Relations
@@ -117,6 +116,7 @@ class Company(models.Model):
         default_related_name = 'companies'
         verbose_name = 'company'
         verbose_name_plural = 'companies'
+
 
 class Customer(models.Model):
     # Relations

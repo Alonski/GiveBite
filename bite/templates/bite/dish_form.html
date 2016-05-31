@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+    <a href="{% url 'bite:index' %}">Home</a> > Add Dish
+    <hr>
+    <form method="post" class="form">
+        {#    {{ view.message|default:"" }}#}
+        {% csrf_token %}
+        <ul>
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                    {% bootstrap_icon "star" %} {{ view.button_label|default:'Add' }}
+                </button>
+            {% endbuttons %}
+        </ul>
+    </form>
+{% endblock %}

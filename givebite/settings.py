@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'bootstrap3',
     'bite',
+    'autofixture',
 ]
 
 MIDDLEWARE_CLASSES = [
