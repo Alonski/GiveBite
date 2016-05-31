@@ -14,3 +14,6 @@ class IndexView(ListView):
 
 class RestaurantListView(ListView):
     model = Restaurant
+
+class RestaurantDetailView(DetailView):
+    model = Restaurant
