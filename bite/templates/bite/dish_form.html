@@ -2,7 +2,13 @@
 {% load bootstrap3 %}
 
 {% block content %}
-    <a href="{% url 'bite:index' %}">Home</a> > Add Dish
+    <a href="{% url 'bite:index' %}">Home</a>
+    &gt;
+    <a href="{{ view.restaurant.get_absolute_url }}">
+        {{ view.restaurant }}
+    </a>
+    &gt;
+    Add Dish
     <hr>
     <form method="post" class="form">
         {#    {{ view.message|default:"" }}#}

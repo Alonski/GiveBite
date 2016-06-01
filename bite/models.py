@@ -60,7 +60,7 @@ class Dish(models.Model):
     )
     # Attributes - Mandatory
     name = models.CharField(max_length=50)
-    price = models.DecimalField(decimal_places=2, max_digits=3)
+    price = models.DecimalField(decimal_places=2, max_digits=7)
     # Attributes - Optional
     description = models.CharField(max_length=100, null=True, blank=True)
 
@@ -69,7 +69,7 @@ class Dish(models.Model):
     # Meta and String
 
     def __str__(self):
-        return "{}-{}-{}".format(self.name, self.price, self.description)
+        return "{}-{}-{}-{}".format(self.name, self.price, self.description, self.restaurant)
 
 
 class Company(models.Model):

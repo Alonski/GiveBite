@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-{#    <a href="{% url 'bite:dishes_add' object.restaurant_id %}">Add Dish</a>#}
+    <a href="{% url 'bite:restaurant_add' %}">Add Restaurant</a>
     <table>
         <thead>
         <tr>
@@ -20,7 +20,7 @@
                 <td>{{ object.name }}</td>
                 <td>$ {{ object.address }}</td>
                 <td>{{ object.phone }}</td>
-{#                <td><a href="{% url 'bite:dishes_update' object.id %}">Update</a></td>#}
+{#                <td><a href="{% url 'bite:dishes_update' object.restaurant.id %}">Update</a></td>#}
 {#                <td><a href="{% url 'bite:dishes_delete' object.restaurant_id %}">Delete</a></td>#}
 {#                <td>{{ object.delete }}</td>#}
             </tr>
