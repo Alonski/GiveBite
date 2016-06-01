@@ -1,0 +1,27 @@
+{% extends "bite/restaurant_list.html" %}
+{% load bootstrap3 %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    &gt;
+    <a href="{{ view.get_absolute_url }}">{{ view.page_title }}</a>
+{% endblock %}
+
+{% block content %}
+    <p>
+    Are you sure you want to delete:<br/>
+    Name - {{ object.name }}<br/>
+    Owner - {{ object.owner }}<br/>
+    Description - {{ object.description }}<br/>
+    </p>
+    <form method="post" class="form">
+        {% csrf_token %}
+        <ul>
+            {% buttons %}
+                <button type="submit" class="btn btn-danger">
+                    {% bootstrap_icon "trash" %} {{ view.button_label|default:'Add' }}
+                </button>
+            {% endbuttons %}
+        </ul>
+    </form>
+{% endblock %}
