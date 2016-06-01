@@ -73,7 +73,7 @@ class RestaurantCreateView(RestaurantMixin, CreateView):
 
 
 class RestaurantUpdateView(RestaurantMixin, UpdateView):
-    page_title = "Update Dish"
+    page_title = "Update Restaurant"
     button_label = "Update"
 
     # def get_success_url(self):
@@ -85,7 +85,7 @@ class RestaurantUpdateView(RestaurantMixin, UpdateView):
 
 
 class RestaurantDeleteView(RestaurantMixin, DeleteView):
-    page_title = "Delete Dish"
+    page_title = "Delete Restaurant"
     button_label = "Delete"
 
     # def get_success_url(self):
@@ -119,8 +119,8 @@ class DishMixin:
         'name',
         'price',
         'description',
-        'restaurant',
-        'id',
+        # 'restaurant',
+        # 'id',
     )
     # success_url = reverse_lazy('bite:dishes_list')
     model = Dish
@@ -128,6 +128,14 @@ class DishMixin:
     def get(self, request, restaurant_id, *args, **kwargs):
         self.restaurant = get_object_or_404(Restaurant, id=restaurant_id)
         return super().get(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        if 'restaurant_id' in self.kwargs:
+            restaurant_id = self.kwargs['restaurant_id']
+        else:
+            restaurant_id = 'none'
+        form.instance.restaurant_id = restaurant_id
+        return super().form_valid(form)
 
 
 class DishCreateView(DishMixin, CreateView):

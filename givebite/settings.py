@@ -113,6 +113,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+# PHONENUMBER_DB_FORMAT = 'NATIONAL'
+# PHONENUMBER_DEFAULT_REGION = ''
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 

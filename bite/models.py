@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.core.validators import RegexValidator
 from django.db import models
 from django.core.validators import MinValueValidator
+from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 # TODO move this validator to somewhere else!
@@ -20,7 +21,7 @@ class Restaurant(models.Model):
     address = models.CharField(
         max_length=100,
         verbose_name='address',
-        help_text='Enter valid address(City, Street, Number)',
+        help_text='Enter a valid address(City, Street, Number)',
         # TODO regex validator for all languages.
         validators=[],
     )
@@ -30,7 +31,7 @@ class Restaurant(models.Model):
         max_length=10,
         verbose_name='phone',
         validators=[],
-        help_text='Enter valid phone number',
+        help_text='Enter a valid phone number',
     )
 
     email = models.EmailField(verbose_name='email')
