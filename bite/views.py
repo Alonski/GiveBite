@@ -1,6 +1,6 @@
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse_lazy, reverse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.utils.encoding import force_text
 from django.views.generic import *
 from .models import *
@@ -27,14 +27,15 @@ class RestaurantDetailView(DetailView):
     page_title = "Restaurant Detail"
     model = Restaurant
 
-    # def get(self, request, pk, *args, **kwargs):
-    #     """
-    #     Overrides get function then adds a model of type Restaurant to the view whose id = restaurant_id
-    #     :param restaurant_id: Gets restaurant_id from url (?P<restaurant_id>[0-9]+)
-    #     :return: The regular get return. No need to return our self.restaurant model.
-    #     """
-    #     self.restaurant = get_object_or_404(Restaurant, id=pk)
-    #     return super().get(request, *args, **kwargs)
+    def get(self, request, pk, *args, **kwargs):
+        """
+        Overrides get function then adds a model of type Restaurant to the view whose id = restaurant_id
+        :param restaurant_id: Gets restaurant_id from url (?P<restaurant_id>[0-9]+)
+        :return: The regular get return. No need to return our self.restaurant model.
+        """
+        self.restaurant = get_object_or_404(Restaurant, id=pk)
+        self.dishes = get_list_or_404(Dish, restaurant=self.restaurant)
+        return super().get(request, *args, **kwargs)
 
 
 class DishListView(ListView):
