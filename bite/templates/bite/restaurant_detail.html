@@ -1,31 +1,42 @@
-{% extends "base.html" %}
+{% extends "bite/restaurant_list.html" %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    &gt;
+    {% if not view.restaurant.name %}
+        <a href="{{ view.restaurant.get_absolute_url }}">{{ object.name }}</a>
+    {% else %}
+        <a href="{{ view.restaurant.get_absolute_url }}">{{ view.restaurant.name }}</a>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
-    <a href="{% url 'bite:restaurant_add' %}">Add Restaurant</a>
-    <table>
-        <thead>
-        <tr>
+{#    <a href="{% url 'bite:restaurant_add' %}">Add Restaurant</a>#}
+{#    <table>#}
+{#        <thead>#}
+{#        <tr>#}
 {#            <th>Account</th>#}
-            <th>Name</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Update</th>
-            <th>Delete</th>
+{#            <th>Name</th>#}
+{#            <th>Address</th>#}
+{#            <th>Phone</th>#}
+{#            <th>Update</th>#}
+{#            <th>Delete</th>#}
 {#            <th>Delete?</th>#}
-        </tr>
-        </thead>
-        <tbody>
-        {% for object in object_list %}
-            <tr>
+{#        </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#        {% for object in object_list %}#}
+{#            <tr>#}
 {#                <td>{{ object.account }}</td>#}
-                <td>{{ object.name }}</td>
-                <td>$ {{ object.address }}</td>
-                <td>{{ object.phone }}</td>
+{#                <td>{{ object.name }}</td>#}
+{#                <td>$ {{ object.address }}</td>#}
+{#                <td>{{ object.phone }}</td>#}
 {#                <td><a href="{% url 'bite:dishes_update' object.restaurant.id %}">Update</a></td>#}
 {#                <td><a href="{% url 'bite:dishes_delete' object.restaurant_id %}">Delete</a></td>#}
 {#                <td>{{ object.delete }}</td>#}
-            </tr>
-        {% endfor %}
-        </tbody>
+{#            </tr>#}
+{#        {% endfor %}#}
+{#        </tbody>#}
 {#        <tfoot>#}
 {#        <tr>#}
 {#            <td>Total:</td>#}
@@ -33,5 +44,5 @@
 {#            <td></td>#}
 {#        </tr>#}
 {#        </tfoot>#}
-    </table>
+{#    </table>#}
 {% endblock %}

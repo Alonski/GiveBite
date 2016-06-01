@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.core.validators import RegexValidator
 from django.db import models
 from django.core.validators import MinValueValidator
@@ -49,6 +50,9 @@ class Restaurant(models.Model):
 
     def __str__(self):
         return "{} - {}".format(self.name, self.phone)
+
+    def get_absolute_url(self):
+        return reverse('bite:restaurant_detail', args=(self.pk,))
 
 
 class Dish(models.Model):

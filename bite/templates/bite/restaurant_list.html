@@ -1,4 +1,11 @@
 {% extends "base.html" %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    &gt;
+    <a href="{% url 'bite:restaurant_list' %}">Restaurants</a>
+{% endblock %}
+
 {% block content %}
     <a href="{% url 'bite:restaurant_add' %}">Add Restaurant</a>
     <table>

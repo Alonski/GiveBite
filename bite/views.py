@@ -27,6 +27,15 @@ class RestaurantDetailView(DetailView):
     page_title = "Restaurant Detail"
     model = Restaurant
 
+    # def get(self, request, pk, *args, **kwargs):
+    #     """
+    #     Overrides get function then adds a model of type Restaurant to the view whose id = restaurant_id
+    #     :param restaurant_id: Gets restaurant_id from url (?P<restaurant_id>[0-9]+)
+    #     :return: The regular get return. No need to return our self.restaurant model.
+    #     """
+    #     self.restaurant = get_object_or_404(Restaurant, id=pk)
+    #     return super().get(request, *args, **kwargs)
+
 
 class DishListView(ListView):
     page_title = "Restaurant Menu"
