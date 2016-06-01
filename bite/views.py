@@ -29,10 +29,16 @@ class RestaurantDetailView(DetailView):
 
 
 class DishListView(ListView):
-    page_title = "Dishes List"
+    page_title = "Restaurant Menu"
+    page_name = "Menu"
     model = Dish
 
     def get(self, request, restaurant_id, *args, **kwargs):
+        """
+        Overrides get function then adds a model of type Restaurant to the view whose id = restaurant_id
+        :param restaurant_id: Gets restaurant_id from url (?P<restaurant_id>[0-9]+)
+        :return: The regular get return. No need to return our self.restaurant model.
+        """
         self.restaurant = get_object_or_404(Restaurant, id=restaurant_id)
         return super().get(request, *args, **kwargs)
 
@@ -52,17 +58,12 @@ class DishMixin:
     model = Dish
 
     def get(self, request, restaurant_id, *args, **kwargs):
-        """
-        Overrides get then adds a model of type Restaurant to the view whose id = restaurant_id
-        :param restaurant_id: Gets restaurant_id from url (?P<restaurant_id>[0-9]+)
-        :return: The regular get return. No need to return our self.restaurant model.
-        """
         self.restaurant = get_object_or_404(Restaurant, id=restaurant_id)
         return super().get(request, *args, **kwargs)
 
 
 class DishCreateView(DishMixin, CreateView):
-    page_title = "Dishes Add"
+    page_title = "Add Dish"
 
     def get_success_url(self):
         """
@@ -79,7 +80,7 @@ class DishCreateView(DishMixin, CreateView):
 
 
 class DishUpdateView(DishMixin, UpdateView):
-    page_title = "Dishes Edit"
+    page_title = "Update Dish"
     button_label = "Update"
 
     def get_success_url(self):
@@ -91,7 +92,7 @@ class DishUpdateView(DishMixin, UpdateView):
 
 
 class DishDeleteView(DishMixin, DeleteView):
-    page_title = "Dishes Delete"
+    page_title = "Delete Dish"
     button_label = "Delete"
 
     def get_success_url(self):

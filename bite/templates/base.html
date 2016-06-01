@@ -31,6 +31,10 @@
 {#        </div>#}
     </div>
     <div>
+        {% block breadcrumbs %}
+            <a href="{% url 'bite:index' %}">Home</a>
+        {% endblock %}
+        <hr>
         {% block content %}
             CONTENT
         {% endblock %}
