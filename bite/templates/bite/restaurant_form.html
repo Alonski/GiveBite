@@ -1,0 +1,23 @@
+{% extends "bite/restaurant_list.html" %}
+{% load bootstrap3 %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    &gt;
+    <a href="{{ view.get_absolute_url }}">{{ view.page_title }}</a>
+{% endblock %}
+
+{% block content %}
+    <form method="post" class="form">
+        {#    {{ view.message|default:"" }}#}
+        {% csrf_token %}
+        <ul>
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                    {% bootstrap_icon "star" %} {{ view.button_label|default:'Add' }}
+                </button>
+            {% endbuttons %}
+        </ul>
+    </form>
+{% endblock %}
