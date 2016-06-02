@@ -177,3 +177,9 @@ class DishDeleteView(DishMixin, DeleteView):
         else:
             restaurant_id = 'none'
         return reverse('bite:dishes_list', kwargs={'restaurant_id': restaurant_id})
+
+
+class OrderView(ListView):
+    page_title = "Order Page"
+    template_name = 'bite/order_page.html'
+    model = Dish

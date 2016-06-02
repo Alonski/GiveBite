@@ -14,4 +14,5 @@ urlpatterns = [
     # url(r'^restaurant/(?P<restaurant_id>[0-9]+)/menu/(?P<pk>[0-9]+)/$', views.DishViewView.as_view(), name='dishes_view'),
     url(r'^restaurant/(?P<restaurant_id>[0-9]+)/menu/(?P<pk>[0-9]+)/delete/$', views.DishDeleteView.as_view(), name='dishes_delete'),
     url(r'^restaurant/(?P<restaurant_id>[0-9]+)/menu/(?P<pk>[0-9]+)/update/$', views.DishUpdateView.as_view(), name='dishes_update'),
+    url(r'^user/order/$', views.OrderView.as_view(), name='user_order'),
 ]

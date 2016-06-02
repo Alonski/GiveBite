@@ -151,3 +151,24 @@ class Customer(models.Model):
     # Object Manager
     # Custom Properties Methods
     # Meta and String
+
+
+# class Order(models.Model):
+#     # Relations
+#     restaurant = models.ForeignKey(
+#         Restaurant,
+#         related_name='order',
+#         on_delete=models.CASCADE,
+#     )
+#     # Attributes - Mandatory
+#     name = models.CharField(max_length=50)
+#     price = models.DecimalField(decimal_places=2, max_digits=7)
+#     # Attributes - Optional
+#     description = models.CharField(max_length=100, null=True, blank=True)
+#
+#     # Object Manager
+#     # Custom Properties Methods
+#     # Meta and String
+#
+#     def __str__(self):
+#         return "{}-{}-{}-{}".format(self.name, self.price, self.description, self.restaurant)

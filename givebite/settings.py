@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'bite',
     'autofixture',
+    # 'social.apps.django_app.default',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -65,6 +66,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # 'social.apps.django_app.context_processors.backends',
+                # 'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -100,6 +103,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# # Authentication Backends
+# AUTHENTICATION_BACKENDS = (
+#     'social.backends.open_id.OpenIdAuth',
+#     'social.backends.google.GoogleOpenId',
+#     'social.backends.google.GoogleOAuth2',
+#     'social.backends.google.GoogleOAuth',
+#     'social.backends.twitter.TwitterOAuth',
+#     'social.backends.yahoo.YahooOpenId',
+#     'django.contrib.auth.backends.ModelBackend',
+# )
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
@@ -113,10 +127,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-# PHONENUMBER_DB_FORMAT = 'NATIONAL'
-# PHONENUMBER_DEFAULT_REGION = ''
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# # Social Auth
+# SOCIAL_AUTH_URL_NAMESPACE = 'social'
+# SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
+

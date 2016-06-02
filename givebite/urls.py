@@ -16,7 +16,9 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
 urlpatterns = [
+    # url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^', include('bite.urls')),
     url(r'^admin/', admin.site.urls),
 ]
