@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load staticfiles %}
 {% block breadcrumbs %}
     {{ block.super }}
     &gt;
@@ -24,6 +23,4 @@
             <button type="button" class="btn btn-default">Order</button>
         </form>
     </div>
-    <a href="{% static "bite/js/test.html"%}">test</a>
-    <script src="{% static "bite/js/order_page.js" %}"></script>
 {% endblock %}
