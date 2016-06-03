@@ -56,14 +56,15 @@ class RestaurantDetailView(RestaurantMixin, DetailView):
         :param restaurant_id: Gets restaurant_id from url (?P<restaurant_id>[0-9]+)
         :return: The regular get return. No need to return our self.restaurant model.
         """
-
         self.restaurant = get_object_or_404(Restaurant, id=pk)
+
         def get_list_or_none(klass, *args, **kwargs):
             queryset = _get_queryset(klass)
             obj_list = list(queryset.filter(*args, **kwargs))
             if obj_list:
                 return obj_list
             return []
+
         self.dishes = get_list_or_none(Dish, restaurant=self.restaurant)
         return super().get(request, *args, **kwargs)
 
@@ -183,3 +184,19 @@ class OrderView(ListView):
     page_title = "Order Page"
     template_name = 'bite/order_page.html'
     model = Dish
+
+    def get(self, request, *args, **kwargs):
+        self.restaurant = get_object_or_404(Restaurant, id=self.kwargs['pk'])
+        return super().get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return super().get_queryset().filter(restaurant=self.restaurant)
+
+
+class OrderListView(ListView):
+    page_title = "Our Orders"
+    model = Order
+
+    def get(self, request, *args, **kwargs):
+        self.restaurant = get_object_or_404(Restaurant, id=self.kwargs['pk'])
+        return super().get(request, *args, **kwargs)

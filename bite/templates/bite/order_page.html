@@ -1,26 +1,33 @@
-{% extends "base.html" %}
+{% extends "bite/restaurant_detail.html" %}
 {% block breadcrumbs %}
     {{ block.super }}
     &gt;
     {#    <a href="{% url 'bite:dishes_list' view.restaurant.id %}">Restaurant Menu</a>#}
-    <a href="#UserPage">User</a>
-    &gt;
     <a href="#OrderPage">Order</a>
 {% endblock %}
 
 {% block content %}
     {#    <a href="{% url 'bite:dishes_add' view.restaurant.id %}">Add Dish</a>#}
-    <h3>Click on a dish to add to order</h3>
-    <ul id="dishes">
-        {% for object in object_list %}
-            <li data-id="{{ object.id }}">{{ object.name }} - $ {{ object.price }} - {{ object.restaurant.name }}</li>
-            {#        <td>{{ object.description }}</td>#}
-        {% endfor %}
-    </ul>
-    <div style="border: 1px solid black">
-        <form id="frm">
-            <ul></ul>
-            <button type="button" class="btn btn-default">Order</button>
-        </form>
+    <div class="row">
+        <h3>Click on a dish to add to order</h3>
+        <div class="col-md-6">
+            <ul id="dishes">
+                {% for object in object_list %}
+                    <li data-id="{{ object.id }}" data-price="{{ object.price }}">{{ object.name }} - $ {{ object.price }} - {{ object.restaurant.name }}</li>
+                    {#        <td>{{ object.description }}</td>#}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <div style="border: 1px solid black">
+                <form id="frm">
+                    <ul></ul>
+                    <div style="text-align: center">
+                        <p id="price_total">Total: $<span>0</span></p>
+                        <button type="button" class="btn btn-default">Order</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 {% endblock %}
