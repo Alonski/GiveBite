@@ -2,8 +2,7 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    &gt;
-    <a href="{% url 'bite:dishes_list' view.restaurant.id %}">Restaurant Menu</a>
+    <li><a href="{% url 'bite:dishes_list' view.restaurant.id %}">Restaurant Menu</a></li>
 {% endblock %}
 
 {% block content %}

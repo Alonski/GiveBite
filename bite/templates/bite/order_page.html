@@ -1,9 +1,9 @@
 {% extends "bite/restaurant_detail.html" %}
+{% load staticfiles %}
 {% block breadcrumbs %}
     {{ block.super }}
-    &gt;
+    <li><a href="{% url 'bite:user_order' view.restaurant.id %}">Order</a></li>
     {#    <a href="{% url 'bite:dishes_list' view.restaurant.id %}">Restaurant Menu</a>#}
-    <a href="#OrderPage">Order</a>
 {% endblock %}
 
 {% block content %}
@@ -30,4 +30,9 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static "bite/js/order_page.js" %}"></script>
+    <script src="{% static "bite/js/jquery.tablesorter.js" %}"></script>
 {% endblock %}

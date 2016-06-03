@@ -1,42 +1,76 @@
 {% extends "bite/restaurant_detail.html" %}
+{% load staticfiles %}
+
 {% block breadcrumbs %}
     {{ block.super }}
-    &gt;
+    <li><a href="#OurOrdersPage">Our Orders</a></li>
     {#    <a href="{% url 'bite:dishes_list' view.restaurant.id %}">Restaurant Menu</a>#}
-    <a href="#OurOrdersPage">Our Orders</a>
 {% endblock %}
 
 {% block content %}
     {#    <a href="{% url 'bite:dishes_add' view.restaurant.id %}">Add Dish</a>#}
-    <div class="row">
-        {#        <h3>Click on a dish to add to order</h3>#}
-        <div class="col-md-6">
-            <ul id="orders">
-                {% if not object_list %}
-                    No Orders to display
-                {% else %}
-                    {% for object in object_list %}
-                        <li>Order Number: {{ object.id }}</li>
-                        <ul>
-                            <li>{{ object.price }}</li>
-                        </ul>
-{#                        {{ object.id }} - $ {{ object.price }} - {{ object.dishes.all }}#}
-{#                        <td>{{ object.description }}</td>#}
-                    {% endfor %}
-                {% endif %}
+    {#        <h3>Click on a dish to add to order</h3>#}
+    {% if not object_list %}
+        No Orders to display
+    {% else %}
+        <div class="panel panel-default">
+            <div class="panel-heading text-center">Our Orders</div>
+            <div class="panel-body">Click on a table header to sort the table.</div>
+        </div>
+        <div class="table-responsive">
+            <table id="myTable" class="table table-hover tablesorter">
+                <thead>
+                <tr class="info">
+                    <th>Order #</th>
+                    <th>Date and Time</th>
+                    <th>Dishes</th>
+                    <th>Total Price</th>
+                    <th>Ordered By</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>Completed</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for object in object_list %}
+                    <tr>
+                        <td>{{ object.id }}</td>
+                        <td># TODO Date Time</td>
+                        <td>
+                            <ul>
+                                {% for dish in object.dishes.all %}
+                                    <li>
+                                        Name: {{ dish.name }}
+                                        <ul>
+                                            <li>${{ dish.price }}</li>
+                                            <li>Description: {{ dish.description }}</li>
+                                        </ul>
+                                        {#                                    {{ dish }}#}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>{{ object.price }}</td>
+                        <td># TODO Ordered By</td>
+                        <td># TODO Phone</td>
+                        <td># TODO Address</td>
+                        <td># TODO City</td>
+                        <td># TODO Completed</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}
 
-            </ul>
-        </div>
-        <div class="col-md-6">
-            {#            <div style="border: 1px solid black">#}
-            {#                <form id="frm">#}
-            {#                    <ul></ul>#}
-            {#                    <div style="text-align: center">#}
-            {#                        <p id="price_total">Total: $<span>0</span></p>#}
-            {#                        <button type="button" class="btn btn-default">Order</button>#}
-            {#                    </div>#}
-            {#                </form>#}
-            {#            </div>#}
-        </div>
-    </div>
+{% block scripts %}
+    <script src="{% static "bite/js/jquery.tablesorter.js" %}"></script>
+    <script>
+        $(document).ready(function () {
+                    $("#myTable").tablesorter();
+                }
+        );
+    </script>
 {% endblock %}

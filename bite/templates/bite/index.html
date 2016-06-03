@@ -1,4 +1,45 @@
 {% extends "base.html" %}
+{% load staticfiles %}
+
 {% block content %}
-        <a href="{% url 'bite:dishes_list' %}">View Dishes</a>
+    {#    {{ view.fields }}#}
+    <a href="{% url 'bite:restaurant_list' %}">View Restaurants Full</a>
+    <div class="table-responsive">
+        <table id="restTable" class="table table-hover tablesorter">
+            <thead>
+            <tr class="info">
+                {% for field in view.fields %}
+                    <th>{{ field|title }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for object in object_list %}
+                <tr>
+                    <td><a href="{% url 'bite:restaurant_detail' object.pk %}">{{ object.name }}</a></td>
+                    <td>{{ object.address }}</td>
+                    <td>{{ object.phone }}</td>
+                    <td>{{ object.description }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            {#        <tfoot>#}
+            {#        <tr>#}
+            {#            <td>Total:</td>#}
+            {#            <td>$ {{ view.total }}</td>#}
+            {#            <td></td>#}
+            {#        </tr>#}
+            {#        </tfoot>#}
+        </table>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static "bite/js/jquery.tablesorter.js" %}"></script>
+    <script>
+        $(document).ready(function () {
+                    $("#restTable").tablesorter();
+                }
+        );
+    </script>
 {% endblock %}

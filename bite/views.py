@@ -1,22 +1,11 @@
-from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.shortcuts import render, get_object_or_404, get_list_or_404, _get_queryset
 from django.utils.encoding import force_text
 from django.views.generic import *
 from .models import *
 
-
 # Create your views here.
-
-
-class IndexView(ListView):
-    template_name = 'bite/index.html'
-
-    # context_object_name = 'latest_question_list'
-
-    def get_queryset(self):
-        """Return the last five published questions."""
-        return None
+logger = logging.getLogger(__name__)
 
 
 class RestaurantMixin:
@@ -43,6 +32,23 @@ class RestaurantMixin:
     #     return super().get(request, *args, **kwargs)
 
 
+class IndexView(RestaurantMixin, ListView):
+    template_name = 'bite/index.html'
+    fields = (
+        'name',
+        'address',
+        'phone',
+        'description',
+    )
+    page_title = "Home"
+
+    # context_object_name = 'latest_question_list'
+
+    # def get_queryset(self):
+    #     """Return the last five published questions."""
+    #     return None
+
+
 class RestaurantListView(RestaurantMixin, ListView):
     page_title = "Restaurants List"
 
@@ -66,6 +72,7 @@ class RestaurantDetailView(RestaurantMixin, DetailView):
             return []
 
         self.dishes = get_list_or_none(Dish, restaurant=self.restaurant)
+        self.orders = get_list_or_none(Order, restaurant=self.restaurant)
         return super().get(request, *args, **kwargs)
 
 
@@ -197,6 +204,26 @@ class OrderListView(ListView):
     page_title = "Our Orders"
     model = Order
 
+    # def total(self, test):
+    #     total_price = 0
+    #     for dish in self.dishes:
+    #         total_price += dish.price
+    #     return self.dishes
+    #     # return self.get_queryset().dishes.aggregate(sum=Sum('price'))['sum']
+
     def get(self, request, *args, **kwargs):
         self.restaurant = get_object_or_404(Restaurant, id=self.kwargs['pk'])
+
+        # def get_list_or_none(klass, *args, **kwargs):
+        #     queryset = _get_queryset(klass)
+        #     obj_list = list(queryset.filter(*args, **kwargs))
+        #     # logger.error(obj_list)
+        #     if obj_list:
+        #         return obj_list
+        #     return []
+        #
+        # self.dishes = get_list_or_none(Dish, restaurant=self.restaurant)
         return super().get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return super().get_queryset().filter(restaurant=self.restaurant)

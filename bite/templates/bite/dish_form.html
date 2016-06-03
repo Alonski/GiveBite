@@ -3,8 +3,7 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    &gt;
-    <a href="{{ view.get_absolute_url }}">{{ view.page_title }}</a>
+    <li><a href="{{ view.get_absolute_url }}">{{ view.page_title }}</a></li>
 {% endblock %}
 
 {% block content %}

@@ -3,7 +3,7 @@ from . import views
 
 app_name = 'bite'
 urlpatterns = [
-    url(r'^$', views.RestaurantListView.as_view(), name='index'),
+    url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^restaurant/$', views.RestaurantListView.as_view(), name='restaurant_list'),
     url(r'^restaurant/add/$', views.RestaurantCreateView.as_view(), name='restaurant_add'),
     url(r'^restaurant/(?P<pk>[0-9]+)/$', views.RestaurantDetailView.as_view(), name='restaurant_detail'),

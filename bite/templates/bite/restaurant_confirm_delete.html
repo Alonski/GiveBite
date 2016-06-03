@@ -3,16 +3,15 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    &gt;
-    <a href="{{ view.get_absolute_url }}">{{ view.page_title }}</a>
+    <li><a href="{{ view.get_absolute_url }}">{{ view.page_title }}</a></li>
 {% endblock %}
 
 {% block content %}
     <p>
-    Are you sure you want to delete:<br/>
-    Name - {{ object.name }}<br/>
-    Owner - {{ object.owner }}<br/>
-    Description - {{ object.description }}<br/>
+        Are you sure you want to delete:<br/>
+        Name - {{ object.name }}<br/>
+        Owner - {{ object.owner }}<br/>
+        Description - {{ object.description }}<br/>
     </p>
     <form method="post" class="form">
         {% csrf_token %}

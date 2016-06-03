@@ -1,41 +1,89 @@
 {% extends "bite/restaurant_list.html" %}
-
+{% load staticfiles %}
 {% block breadcrumbs %}
     {{ block.super }}
-    &gt;
     {% if not view.restaurant.name %}
-        <a href="{{ view.restaurant.get_absolute_url }}">{{ object.name }}</a>
+        <li><a href="{{ view.restaurant.get_absolute_url }}">{{ object.name }}</a></li>
     {% else %}
-        <a href="{{ view.restaurant.get_absolute_url }}">{{ view.restaurant.name }}</a>
+        <li><a href="{{ view.restaurant.get_absolute_url }}">{{ view.restaurant.name }}</a></li>
     {% endif %}
 {% endblock %}
 
 {% block content %}
-    <h3>Restaurant Menu</h3>
-    <a href="{% url 'bite:dishes_list' object.id %}">Edit Menu</a>
-    <table>
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for object in view.dishes %}
-            <tr>
-                <td>{{ object.name }}</td>
-                <td>$ {{ object.price }}</td>
-                <td>{{ object.description }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-{#        <tfoot>#}
-{#        <tr>#}
-{#            <td>Total:</td>#}
-{#            <td>$ {{ view.total }}</td>#}
-{#            <td></td>#}
-{#        </tr>#}
-{#        </tfoot>#}
-    </table>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Restaurant Menu</h3>
+            <p><a href="{% url 'bite:dishes_list' object.id %}">Edit Menu</a></p>
+            <div class="table-responsive">
+                <table id="menuTable" class="table table-hover tablesorter">
+                    <thead>
+                    <tr class="info">
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for object in view.dishes %}
+                        <tr>
+                            <td>{{ object.name }}</td>
+                            <td>$ {{ object.price }}</td>
+                            <td>{{ object.description }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    {#        <tfoot>#}
+                    {#        <tr>#}
+                    {#            <td>Total:</td>#}
+                    {#            <td>$ {{ view.total }}</td>#}
+                    {#            <td></td>#}
+                    {#        </tr>#}
+                    {#        </tfoot>#}
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3 class="text-center">Orders</h3>
+            <p><a href="{% url 'bite:restaurant_orders' object.id %}">View Orders</a></p>
+            {% if not view.orders %}
+                No Orders to display
+            {% else %}
+                <div class="table-responsive">
+                    <table id="orderTable" class="table table-hover tablesorter">
+                        <thead>
+                        <tr class="info">
+                            <th>Order #</th>
+                            <th>Date and Time</th>
+                            <th>Total Price</th>
+                            <th>Ordered By</th>
+                            <th>Completed</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for object in view.orders %}
+                            <tr>
+                                <td>{{ object.id }}</td>
+                                <td># TODO Date Time</td>
+                                <td>{{ object.price }}</td>
+                                <td># TODO Ordered By</td>
+                                <td># TODO Completed</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static "bite/js/jquery.tablesorter.js" %}"></script>
+    <script>
+        $(document).ready(function () {
+                    $("#menuTable").tablesorter();
+                    $("#orderTable").tablesorter();
+                }
+        );
+    </script>
 {% endblock %}

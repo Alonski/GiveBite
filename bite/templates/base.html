@@ -80,8 +80,10 @@
 <div class="container-fluid">
     <div>
         {% block breadcrumbs %}
-            <a href="{% url 'bite:index' %}">Home</a>
+            <ol class="breadcrumb">
+                <li><a href="{% url 'bite:index' %}">Home</a></li>
         {% endblock %}
+        </ol>
         <hr>
         {% block content %}
             CONTENT
@@ -91,7 +93,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
         crossorigin="anonymous"></script>
-<script src="{% static "bite/js/order_page.js" %}"></script>
 
+{% block scripts %}
+{#    SCRIPTS#}
+{% endblock %}
 </body>
 </html>

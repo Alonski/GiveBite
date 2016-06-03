@@ -190,7 +190,7 @@ class Order(models.Model):
     # Meta and String
 
     def __str__(self):
-        return "{}-{}-{}-{}".format(self.id, self.price, self.dishes.all(), self.restaurant)
+        return "ID:#{} - Restaurant: {} - Dishes: {} - Total: ${}".format(self.id, self.restaurant, self.dishes, self.price)
 
     # def __init__(self, *args, **kwargs):
     #     # self.price = Dish.objects.filter(restaurant=self.restaurant).aggregate(sum=Sum('price'))['sum']
