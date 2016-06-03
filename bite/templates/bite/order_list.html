@@ -7,6 +7,11 @@
     {#    <a href="{% url 'bite:dishes_list' view.restaurant.id %}">Restaurant Menu</a>#}
 {% endblock %}
 
+{% block mypage %}
+    <li><a href="{% url 'bite:restaurant_list' %}">My Restaurants</a></li>
+{% endblock %}
+
+
 {% block content %}
     {#    <a href="{% url 'bite:dishes_add' view.restaurant.id %}">Add Dish</a>#}
     {#        <h3>Click on a dish to add to order</h3>#}
@@ -63,6 +68,10 @@
             </table>
         </div>
     {% endif %}
+{% endblock %}
+
+{% block css %}
+    <link href="{% static "bite/css/tables.css" %}" rel="stylesheet"/>
 {% endblock %}
 
 {% block scripts %}

@@ -6,6 +6,10 @@
     {#    <a href="{% url 'bite:dishes_list' view.restaurant.id %}">Restaurant Menu</a>#}
 {% endblock %}
 
+{% block mypage %}
+    <li><a href="#User_My_Orders">My Orders</a></li>
+{% endblock %}
+
 {% block content %}
     {#    <a href="{% url 'bite:dishes_add' view.restaurant.id %}">Add Dish</a>#}
     <div class="row">
@@ -19,8 +23,13 @@
             </ul>
         </div>
         <div class="col-md-6">
+{#            <form action="" method="post">{% csrf_token %}#}
+{#                {{ form.as_p }}#}
+{#                <input type="submit" value="Save"/>#}
+{#            </form>#}
             <div style="border: 1px solid black">
-                <form id="frm">
+                <form method="post" id="frm">
+                    {% csrf_token %}
                     <ul></ul>
                     <div style="text-align: center">
                         <p id="price_total">Total: $<span>0</span></p>

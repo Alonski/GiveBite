@@ -6,6 +6,10 @@
     <li><a href="{{ view.get_absolute_url }}">{{ view.page_title }}</a></li>
 {% endblock %}
 
+{% block mypage %}
+    <li><a href="{% url 'bite:restaurant_list' %}">My Restaurants</a></li>
+{% endblock %}
+
 {% block content %}
     <p>
         Are you sure you want to delete:<br/>

@@ -9,6 +9,10 @@
     {% endif %}
 {% endblock %}
 
+{% block mypage %}
+    <li><a href="{% url 'bite:restaurant_list' %}">My Restaurants</a></li>
+{% endblock %}
+
 {% block content %}
     <div class="row">
         <div class="col-md-6">
@@ -75,6 +79,10 @@
             {% endif %}
         </div>
     </div>
+{% endblock %}
+
+{% block css %}
+    <link href="{% static "bite/css/tables.css" %}" rel="stylesheet"/>
 {% endblock %}
 
 {% block scripts %}

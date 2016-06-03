@@ -6,6 +6,10 @@
     <li><a href="{% url 'bite:restaurant_list' %}">Restaurants</a></li>
 {% endblock %}
 
+{% block mypage %}
+    <li><a href="{% url 'bite:restaurant_list' %}">My Restaurants</a></li>
+{% endblock %}
+
 {% block content %}
     {#    {{ view.fields }}#}
     <a href="{% url 'bite:restaurant_add' %}">Add Restaurant</a>
@@ -44,6 +48,10 @@
             {#        </tfoot>#}
         </table>
     </div>
+{% endblock %}
+
+{% block css %}
+    <link href="{% static "bite/css/tables.css" %}" rel="stylesheet"/>
 {% endblock %}
 
 {% block scripts %}
