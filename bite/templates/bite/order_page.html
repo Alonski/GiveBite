@@ -13,8 +13,8 @@
 {% block content %}
     {#    <a href="{% url 'bite:dishes_add' view.restaurant.id %}">Add Dish</a>#}
     <div class="row">
-        <h3>Click on a dish to add to order</h3>
         <div class="col-md-6">
+            <h3 align="center">Click on a dish to add to order</h3>
             <div class="table-responsive">
                 <table id="menuTable" class="table table-hover tablesorter">
                     <thead>
@@ -35,14 +35,15 @@
                     </tbody>
                 </table>
             </div>
-{#            <ul id="dishes">#}
-{#                {% for object in object_list %}#}
-{#                    <li data-id="{{ object.id }}" data-price="{{ object.price }}">{{ object.name }} - $ {{ object.price }} - {{ object.restaurant.name }}</li>#}
-                    {#        <td>{{ object.description }}</td>#}
-{#                {% endfor %}#}
-{#            </ul>#}
+            {#            <ul id="dishes">#}
+            {#                {% for object in object_list %}#}
+            {#                    <li data-id="{{ object.id }}" data-price="{{ object.price }}">{{ object.name }} - $ {{ object.price }} - {{ object.restaurant.name }}</li>#}
+            {#        <td>{{ object.description }}</td>#}
+            {#                {% endfor %}#}
+            {#            </ul>#}
         </div>
         <div class="col-md-6">
+            <h3 align="center">Click on a dish to remove from order</h3>
             {#            <form action="" method="post">{% csrf_token %}#}
             {#                {{ form.as_p }}#}
             {#                <input type="submit" value="Save"/>#}
@@ -83,7 +84,7 @@
     <script>
         $(document).ready(function () {
                     $("#menuTable").tablesorter();
-{#                    $("#orderTable").tablesorter();#}
+                    {#                    $("#orderTable").tablesorter();#}
                 }
         );
     </script>
