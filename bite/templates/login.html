@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    <li><a href="{{ view.get_absolute_url }}">{{ view.page_title }}</a></li>
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <h1>{{ view.page_title }}</h1>
+        <ul>
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                {% bootstrap_icon "OK" %} OK
+                </button>
+            {% endbuttons %}
+        </ul>
+    </form>
+{% endblock %}

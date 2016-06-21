@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    <li><a href="{{ view.get_absolute_url }}">{{ view.page_title }}</a></li>
+{% endblock %}
+
+{% block content %}
+    <h1><a href="{% url "bite:signup_customer" %}">Register</a><br/></h1>
+    <h1><a href="{% url "bite:login" %}">Login</a></h1>
+{% endblock %}
